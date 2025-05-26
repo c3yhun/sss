@@ -190,6 +190,8 @@
                     </li>
                 </ul>
             </li>
+            
+         
 
             @if(\Illuminate\Support\Facades\Auth::user()->user_role == 'admin')
             <li class=" nav-item {{ (Route::currentRouteName() == 'admin.payments.create' || Route::currentRouteName() == 'admin.payments.index') ? 'has-sub open' : '' }}">
@@ -261,7 +263,21 @@
                     </li>
                 </ul>
             </li>
-
+            
+            <!-- Transfer -->
+            <li class="nav-item {{ (Route::currentRouteName() == 'admin.transfer.index') ? 'has-sub open' : '' }}">
+                <a class="d-flex align-items-center" href="#">
+                    <i class="mr-50" data-feather="refresh-cw"></i>
+                    <span class="menu-title text-truncate" data-i18n="Transfer">Virmanlar</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="{{ (Route::currentRouteName() == 'admin.transfer.index') ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href="{{ route('admin.transfer.index') }}">
+                            <i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="TransferIndex">Kasalar Arası Transfer</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <li class=" navigation-header">
                 <span data-i18n="Apps &amp; Pages">KULLANICI İŞLEMLERİ</span>
                 <i data-feather="more-horizontal"></i>

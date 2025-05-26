@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CustomAuthController;
@@ -11,7 +10,7 @@ use App\Http\Controllers\PullController;
 use App\Http\Controllers\StatementController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\TransferController; // Yeni controller
 /*use App\Models\Group;
 use App\Models\Deposit;
 use Illuminate\Support\Facades\DB;
@@ -32,10 +31,12 @@ Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name(
 Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');*/
 Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
-Route::middleware('isLogin')->name('admin.')->group(function (){
-
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
+Route::middleware('isLogin')->name('admin.')->group(function () {
+    // Define the dashboard route (remove duplicate)
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Transfer Route
+    Route::get('transfer', [TransferController::class, 'index'])->name('transfer.index');
+    Route::post('transfer', [TransferController::class, 'store'])->name('transfer.store');
     Route::get('profile/edit/{id}', [CustomAuthController::class, 'profileEdit'])->name('profile.edit');
     Route::post('profile/edit/{id}', [CustomAuthController::class, 'profileEditPost'])->name('profile.edit.post');
 
@@ -50,7 +51,6 @@ Route::middleware('isLogin')->name('admin.')->group(function (){
     Route::resource('pulls', PullController::class);
     Route::resource('statements', StatementController::class)->middleware(['roleChecker:admin']);
     Route::resource('groups', GroupController::class)->middleware(['roleChecker:admin']);
-
 
     Route::get('investment/import', [InvestmentController::class, 'investImport'])->name('investment.import.get');
     Route::post('investment/import', [InvestmentController::class, 'investImportPost'])->name('investment.import');

@@ -14,6 +14,29 @@
                 <!-- Dashboard Analytics Start -->
                 <section id="dashboard-analytics">
                     <div class="row match-height">
+                        <!-- Tarih Aralığı Formu -->
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form method="GET" action="{{ route('admin.dashboard') }}">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-3">
+                                                <label for="start_date">Başlangıç Tarihi:</label>
+                                                <input type="date" id="start_date" name="start_date" class="form-control" value="{{ request('start_date') }}">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="end_date">Bitiş Tarihi:</label>
+                                                <input type="date" id="end_date" name="end_date" class="form-control" value="{{ request('end_date') }}">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="submit" class="btn btn-primary">Filtrele</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Greetings Card starts -->
                         {{--<div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="card card-congratulations">
@@ -35,8 +58,6 @@
                             </div>
                         </div>--}}
                         <!-- Greetings Card ends -->
-
-
 
                         {{--<div class="col-lg-3 col-sm-6 col-12">
                             <div class="card">
@@ -95,58 +116,49 @@
                             </div>
                         </div>--}}
 
-
-
-
-                            <div class="col-lg-6 col-sm-6 col-12">
-                                <div class="card">
-                                    <div class="card-header text-center" style="display: block !important;">
-                                        <h4 class="card-title">GENEL DURUM</h4>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
+                        <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header text-center" style="display: block !important;">
+                                    <h4 class="card-title">GENEL DURUM</h4>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">TÜR</th>
+                                            <th class="text-center">MİKTAR</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
                                             <tr>
-                                                <th class="text-center">TÜR</th>
-                                                <th class="text-center">MİKTAR</th>
+                                                <td class="text-center font-weight-bold">TOPLAM YATIRIM</td>
+                                                <td class="text-center font-weight-bold">{{ number_format($totalInvest, 2) }}</td>
                                             </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-center font-weight-bold">TOPLAM YATIRIM</td>
-                                                    <td class="text-center font-weight-bold">{{ number_format($totalInvest, 2) }}</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="text-center font-weight-bold">TOPLAM ÇEKİM</td>
-                                                    <td class="text-center font-weight-bold">{{ number_format($totalPull, 2) }}</td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="text-center font-weight-bold">TOPLAM KAR</td>
-                                                    <td class="text-center font-weight-bold">{{ number_format($totalProfit, 2) }}</td>
-                                                </tr>
-                                                
-                                                <tr>
-                                                    <td class="text-center font-weight-bold">TOPLAM KAR (%)</td>
-                                                    <td class="text-center font-weight-bold">%{{ number_format($percentEndorsement) }}</td>
-                                                </tr>
-                                                
-                                                <tr>
-                                                    <td class="text-center font-weight-bold">TOPLAM ÖDEME</td>
-                                                    <td class="text-center font-weight-bold">{{ number_format($totalPayment, 2) }}</td>
-                                                </tr>
-                                                
-                                                <tr>
-                                                    <td class="text-center font-weight-bold">TOPLAM KOMİSYON</td>
-                                                    <td class="text-center font-weight-bold">{{ number_format($totalComission, 2) }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            <tr>
+                                                <td class="text-center font-weight-bold">TOPLAM ÇEKİM</td>
+                                                <td class="text-center font-weight-bold">{{ number_format($totalPull, 2) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center font-weight-bold">TOPLAM KAR</td>
+                                                <td class="text-center font-weight-bold">{{ number_format($totalProfit, 2) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center font-weight-bold">TOPLAM KAR (%)</td>
+                                                <td class="text-center font-weight-bold">%{{ number_format($percentEndorsement) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center font-weight-bold">TOPLAM ÖDEME</td>
+                                                <td class="text-center font-weight-bold">{{ number_format($totalPayment, 2) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center font-weight-bold">TOPLAM KOMİSYON</td>
+                                                <td class="text-center font-weight-bold">{{ number_format($totalComission, 2) }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-
+                        </div>
 
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="card">
@@ -163,7 +175,7 @@
                                         </thead>
                                         <tbody>
                                         @if(\App\Models\Deposit::count() > 0)
-                                            @foreach(\App\Models\Group::leftJoin(Illuminate\Support\Facades\DB::raw('(SELECT group_id, SUM(balance) AS balance FROM deposits GROUP BY group_id) as v'), 'v.group_id', '=', 'groups.id')->orderBy('balance', 'desc')->get() as $item)
+                                            @foreach($groupedDeposits as $item)
                                                 <tr>
                                                     <td class="text-center font-weight-bold">{{ $item->title }}</td>
                                                     <td class="text-center font-weight-bold">{{ number_format($item->balance, 2) }}</td>
@@ -172,27 +184,22 @@
                                         @endif
 
                                         @if(\App\Models\Deposit::count() > 0)
-                                            @foreach(\App\Models\Deposit::orderBy('balance','DESC')->where('group_id',NULL)->get() as $item)
+                                            @foreach($ungroupedDeposits as $item)
                                                 <tr>
                                                     <td class="text-center font-weight-bold">{{ $item->title }}</td>
                                                     <td class="text-center font-weight-bold">{{ number_format($item->balance, 2) }}</td>
                                                 </tr>
-
                                             @endforeach
                                         @endif
-                                               @php($balance = DB::table('deposits')->sum('balance'))
-                                                <tr>
-                                                    <td class="text-center font-weight-bold"><b>TOPLAM</b></td>
-                                                    <td class="text-center font-weight-bold">{{ number_format($balance, 2) }}</td>
-                                                </tr>
+                                            <tr>
+                                                <td class="text-center font-weight-bold"><b>TOPLAM</b></td>
+                                                <td class="text-center font-weight-bold">{{ number_format($totalBalance, 2) }}</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-
-
-
 
                         {{--<div class="col-lg-12 col-sm-6 col-12">
                             <div class="card">
@@ -230,7 +237,6 @@
                                         <span> <strong>MİKTAR</strong></span>
                                     </li>
 
-
                                     @if(\App\Models\Group::count() > 0)
                                         @foreach(\App\Models\Group::orderBy('id','DESC')->get() as $item)
                                             @php($sum = \App\Models\Deposit::where('group_id',$item->id)->orderByRaw('SUM(balance) DESC')->sum('balance'))
@@ -244,65 +250,58 @@
                             </div>
                         </div>--}}
 
-                            {{--<div class="col-lg-4 col-sm-6 col-12">
-                                <div class="card">
-                                    <div class="card-header align-items-start pb-0">
-                                        <div>
-                                            <h2 class="font-weight-bolder">{{ \App\Models\User::where('user_role','admin')->count() }}</h2>
-                                            <p class="card-text">TOPLAM YÖNETİCİ</p>
-                                        </div>
-                                        <div class="avatar bg-light-primary p-50">
-                                            <div class="avatar-content">
-                                                <i data-feather='user-plus' class="font-medium-5"></i>
-                                            </div>
+                        {{--<div class="col-lg-4 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header align-items-start pb-0">
+                                    <div>
+                                        <h2 class="font-weight-bolder">{{ \App\Models\User::where('user_role','admin')->count() }}</h2>
+                                        <p class="card-text">TOPLAM YÖNETİCİ</p>
+                                    </div>
+                                    <div class="avatar bg-light-primary p-50">
+                                        <div class="avatar-content">
+                                            <i data-feather='user-plus' class="font-medium-5"></i>
                                         </div>
                                     </div>
-                                    <div id="line-area-chart-5"></div>
                                 </div>
+                                <div id="line-area-chart-5"></div>
                             </div>
+                        </div>
 
-                            <div class="col-lg-4 col-sm-6 col-12">
-                                <div class="card">
-                                    <div class="card-header align-items-start pb-0">
-                                        <div>
-                                            <h2 class="font-weight-bolder">{{ \App\Models\User::where('user_role','user')->count() }}</h2>
-                                            <p class="card-text">TOPLAM KULLANICI</p>
-                                        </div>
-                                        <div class="avatar bg-light-success p-50">
-                                            <div class="avatar-content">
-                                                <i data-feather="user-check" class="font-medium-5"></i>
-                                            </div>
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header align-items-start pb-0">
+                                    <div>
+                                        <h2 class="font-weight-bolder">{{ \App\Models\User::where('user_role','user')->count() }}</h2>
+                                        <p class="card-text">TOPLAM KULLANICI</p>
+                                    </div>
+                                    <div class="avatar bg-light-success p-50">
+                                        <div class="avatar-content">
+                                            <i data-feather="user-check" class="font-medium-5"></i>
                                         </div>
                                     </div>
-                                    <div id="line-area-chart-6"></div>
                                 </div>
+                                <div id="line-area-chart-6"></div>
                             </div>
-                            <div class="col-lg-4 col-sm-6 col-12">
-                                <div class="card">
-                                    <div class="card-header align-items-start pb-0">
-                                        <div>
-                                            <h2 class="font-weight-bolder"><a href="https://www.r10.net/profil/77365-dos.html" style="color: #5e5873">DOS</a></h2>
-                                            <p class="card-text">R10.NET</p>
-                                        </div>
-                                        <div class="avatar bg-light-warning p-50">
-                                            <div class="avatar-content">
-                                                <i data-feather="mail" class="font-medium-5"></i>
-                                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header align-items-start pb-0">
+                                    <div>
+                                        <h2 class="font-weight-bolder"><a href="https://www.r10.net/profil/77365-dos.html" style="color: #5e5873">DOS</a></h2>
+                                        <p class="card-text">R10.NET</p>
+                                    </div>
+                                    <div class="avatar bg-light-warning p-50">
+                                        <div class="avatar-content">
+                                            <i data-feather="mail" class="font-medium-5"></i>
                                         </div>
                                     </div>
-                                    <div id="line-area-chart-7"></div>
                                 </div>
-                            </div>--}}
-
-
-
-
-
+                                <div id="line-area-chart-7"></div>
+                            </div>
+                        </div>--}}
                     </div>
-
                 </section>
                 <!-- Dashboard Analytics end -->
-
             </div>
         </div>
     </div>
@@ -321,7 +320,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('/')}}backend/app-assets/vendors/css/extensions/sweetalert2.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset('/')}}backend/app-assets/css/plugins/extensions/ext-component-sweet-alerts.css">
 
-    <link rel="stylesheet" type="text/css" href="{{asset('/')}}backend/app-assets/css/plugins/charts/chart-apex.css">
+    <link rel="stylesheet" type="text/type" href="{{asset('/')}}backend/app-assets/css/plugins/charts/chart-apex.css">
 @endsection
 
 @section('js')
